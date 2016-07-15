@@ -2,8 +2,6 @@ from deps.peas.peas.networks.rnn import NeuralNetwork
 from itertools import repeat
 import random
 
-import numpy as np
-
 def unravel(n, min_length, zero=0):
     output = []
     while n > 0:
@@ -39,7 +37,7 @@ class MultiplicationTask(object):
         #Create random runs (so as to prevent overfitting)
         new_inputs = [(random.getrandbits(self.bit_sizes), random.getrandbits(self.bit_sizes)) for i in range(self.run_length)]
         new_outputs = [a*b for a, b in new_inputs]
-        pairs = zip(np.array(self.inputs + [map(unravel, t) for t in new_inputs], dtype=float), np.array(self.outputs + map(unravel, new_outputs), dtype=float))
+        pairs = zip(self.inputs + [map(unravel, t) for t in new_inputs], self.outputs + map(unravel, new_outputs))
         random.shuffle(pairs)
         err = 0
         for (i, target) in pairs:
