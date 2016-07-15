@@ -1,4 +1,4 @@
-from deps.peas.peas.networks.rnn import NeuralNetwork
+from deps.peas.networks.rnn import NeuralNetwork
 from itertools import repeat
 import random
 
