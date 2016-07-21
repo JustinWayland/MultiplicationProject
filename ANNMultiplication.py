@@ -1,6 +1,8 @@
 from deps.peas.networks.rnn import NeuralNetwork
+from deps.peas.methods.neat import NEATPopulation, NEATGenotype
 from itertools import repeat
 import random
+import cPickle
 
 def unravel(n, min_length, zero=0):
     output = []
@@ -50,3 +52,25 @@ class MultiplicationTask(object):
     def solve(self, network):
         """ Defines if a network has solved the problem. Size matters more than accuracy, but error should not exceed a certain margin. """
         return (self.evaluate(network) >= self.min_accuracy)
+
+bitsize = 512 #Adjustable
+    
+def genotype():
+    return NEATGenotype(inputs=bitsize*2, outputs=bitsize*2, types=['ident'])
+
+popsize = 250 #Adjustable
+
+pop = NEATPopulation(genotype, popsize=popsize)
+
+run_length = 30 #Adjustable
+
+task = MultiplicationTask(run_length, bitsize)
+
+generations = 100 #Adjustable
+
+pop.epoch(generations=generations, evaluator=task, solution=task) #Run the task code
+
+filename = "testrun.ann" #Adjustable
+
+with open(filename, "wb") as f:
+    cpickle.dump(pop, f, -1) #Serialize the population to a file
