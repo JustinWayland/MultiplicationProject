@@ -79,7 +79,7 @@ def convertParameters(bitsize, weight_min, weight_max, neuron_type, popsize, run
                           runs_file=runs_file)
 
 with open("example.csv", "r") as ps:
-    for p in starmap(convertParamters, csv.reader(ps)):
+    for p in starmap(convertParameters, csv.reader(ps)):
         def genotype():
             return NEATGenotype(inputs=p.bitsize*2, outputs=p.bitsize*2, weight_range=p.weight_range, types=[p.neuron_type])
         with open(p.runs_file, "a") as r:
