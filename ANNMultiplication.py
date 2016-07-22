@@ -31,7 +31,7 @@ class MultiplicationTask(object):
         self.inputs = [map(unravel, item, repeat(bit_sizes)) for item in inputs]
         self.outputs = [a*b for a, b in inputs]
         for x, y, product in map(chain, inputs, outputs):
-            runs_file.write(','.join('fixed', str(x), str(y), str(product)])
+            runs_file.write(','.join(['fixed', str(x), str(y), str(product)]))
             runs_file.write('\n')
         self.bit_sizes = bit_sizes
         self.run_length = run_length
