@@ -1,3 +1,4 @@
+from __future__ import division
 from deps.peas.networks.rnn import NeuralNetwork
 from deps.peas.methods.neat import NEATPopulation, NEATGenotype
 from itertools import repeat, starmap, chain
