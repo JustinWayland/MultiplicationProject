@@ -30,6 +30,7 @@ class NEATGenotype(object):
     """ Implements the NEAT genotype, consisting of
         node genes and connection genes.
     """
+    
     def __init__(self, 
                  inputs=2, 
                  outputs=1, 
@@ -133,7 +134,7 @@ class NEATGenotype(object):
                     innov += 1
         else:
             # If an initial topology is given, use that:
-            fr, to = zip(*topology)
+            fr, to = topology
             maxnode = max(max(fr), max(to))
 
             if maxnode + 1 < inputs + outputs:
@@ -146,7 +147,7 @@ class NEATGenotype(object):
                 layer = 0 if i < inputs else i + 1
                 self.node_genes.append( [i * 1024.0, random.choice(self.types), 0.0, self.response_default, layer] )
             innov = 0
-            for fr, to in topology:
+            for fr, to in zip(*topology):
                 self.conn_genes[(fr, to)] = [innov, fr, to, np.random.normal(0.0, self.initial_weight_stdev), True]
                 innov += 1
                 

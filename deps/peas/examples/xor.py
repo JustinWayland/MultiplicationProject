@@ -17,7 +17,7 @@ genotype = lambda: NEATGenotype(inputs=2,
                                 types=['sigmoid2'])
 
 # Create a population
-pop = NEATPopulation(genotype, popsize=150)
+pop = NEATPopulation(genotype, popsize=150, stop_when_solved=True)
     
 # Create a task
 task = XORTask()

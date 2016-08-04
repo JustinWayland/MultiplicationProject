@@ -16,7 +16,7 @@ class XORTask(object):
     
     # Default XOR input/output pairs
     INPUTS  = [(0,0), (0,1), (1,0), (1,1)]
-    OUTPUTS = [(-1,), (1,), (1,), (-1,)]
+    OUTPUTS = [(0,), (1,), (1,), (0,)]
     EPSILON = 1e-100
     
     def __init__(self, do_all=True):
@@ -30,8 +30,8 @@ class XORTask(object):
         
         network.make_feedforward()
 
-        if not network.node_types[-1](-1000) < -0.95:
-            raise Exception("Network should be able to output value of -1, e.g. using a tanh node.")
+        ## if not network.node_types[-1](-1000) < -0.95:
+        ##     raise Exception("Network should be able to output value of -1, e.g. using a tanh node.")
         
         pairs = zip(self.INPUTS, self.OUTPUTS)
         random.shuffle(pairs)
@@ -55,6 +55,6 @@ class XORTask(object):
         return {'fitness': score}
         
     def solve(self, network):
-        return int(self.evaluate(network) > 0.9)
+        return (self.evaluate(network)['fitness'] > 0.9)
                 
         
