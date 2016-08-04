@@ -1,6 +1,3 @@
-# Currently in desperate need of a revamp
-#  - Need better error function for judging fitness; sheer magnitude of wrong answers vs. right answers is very large
-
 from __future__ import division
 from deps.peas.networks.rnn import NeuralNetwork
 from deps.peas.methods.neat import NEATPopulation, NEATGenotype
