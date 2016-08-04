@@ -32,6 +32,8 @@ def fitnessFunction(output,target):
     indices = [i for i in range(len(target))]
     indices.reverse()
     s = 0
+    #Essentially, give the network a point for every bit it gets right until it gets something wrong
+    #We want to find an approximation for the product, and this allows us to do so.
     for o in indices:
         if output[o] > 0.5:
             bit = 1
@@ -77,14 +79,14 @@ class MultiplicationTask(object):
 
 TaskParams = namedtuple('TaskParams', ['bitsize', 'weight_range', 'neuron_type', 'popsize', 'run_length', 'accuracy_threshold', 'generations', 'ann_file', 'runs_file'])
 
-def convertParameters(bitsize, weight_min, weight_max, neuron_type, popsize, run_length, accuracy_threshold, generations, ann_file, runs_file):
+def convertParameters(bitsize, weight_min, weight_max, neuron_type, popsize, run_length, accuracy_threshold, ann_file, runs_file):
     return TaskParams(bitsize=int(bitsize),
                           weight_range=tuple((float(weight_min),float(weight_max))),
                           neuron_type=neuron_type,
                           popsize=int(popsize),
                           run_length=int(run_length),
                           accuracy_threshold=float(accuracy_threshold),
-                          generations=int(generations),
+                          generations=10000,
                           ann_file=ann_file,
                           runs_file=runs_file)
 
